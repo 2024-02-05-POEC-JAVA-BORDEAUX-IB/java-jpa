@@ -28,7 +28,6 @@ public class PersistenceFactory {
 			this.init = true;
 		}
 		return this.emf.createEntityManager();
-
 	}
 
 }
