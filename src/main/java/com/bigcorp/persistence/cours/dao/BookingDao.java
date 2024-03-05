@@ -70,6 +70,18 @@ public class BookingDao {
 		em.close();
 		return resultList;
 	}
+
+	public List<Booking> getBookingFromNameLike(String name) {
+		EntityManager em = PersistenceFactory.INSTANCE.getEntityManager();
+		TypedQuery<Booking> query = em.createQuery(
+				"select b "
+				+ " from Booking b "
+				+ " where upper(b.name) like upper(concat('%',:paramName,'%')) ", Booking.class);
+		query.setParameter("paramName",  name );
+		List<Booking> resultList = query.getResultList();
+		em.close();
+		return resultList;
+	}
 	
 	
 

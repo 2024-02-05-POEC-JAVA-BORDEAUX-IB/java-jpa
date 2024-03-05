@@ -1,4 +1,4 @@
-package com.bigcorp.java.correction;
+package com.bigcorp.java.correction.javarevision;
 
 import java.util.Scanner;
 
