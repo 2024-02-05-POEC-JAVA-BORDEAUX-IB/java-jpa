@@ -6,14 +6,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Booking {
+public class Booking  {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 
 	private String name;
-
+	
+	private Integer note ;
+	
 	public Long getId() {
 		return id;
 	}
@@ -29,5 +31,14 @@ public class Booking {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public Integer getNote() {
+		return note;
+	}
+
+	public void setNote(Integer note) {
+		this.note = note;
+	}
+	
 
 }
