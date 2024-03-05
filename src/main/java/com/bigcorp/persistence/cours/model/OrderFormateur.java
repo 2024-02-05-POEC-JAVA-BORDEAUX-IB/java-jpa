@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "ORDER_TABLE")
-public class Order {
+public class OrderFormateur {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
