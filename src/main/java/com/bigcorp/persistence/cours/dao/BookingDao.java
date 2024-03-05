@@ -33,7 +33,7 @@ public class BookingDao {
 			Booking savedBooking = entityManager.merge(booking);
 			transaction.commit();
 			return savedBooking;
-		} catch (RuntimeException e) {
+		} catch (Exception e) {
 			if (transaction.isActive()) {
 				transaction.rollback();
 			}
