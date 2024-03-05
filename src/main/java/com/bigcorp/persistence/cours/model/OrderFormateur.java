@@ -11,7 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "ORDER_TABLE")
+@Table(name = "ORDER_TABLE_FORMATEUR")
 public class OrderFormateur {
 
 	@Id
