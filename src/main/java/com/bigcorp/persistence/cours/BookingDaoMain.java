@@ -1,7 +1,5 @@
 package com.bigcorp.persistence.cours;
 
-import java.util.List;
-
 import com.bigcorp.persistence.cours.dao.BookingDao;
 import com.bigcorp.persistence.cours.dao.OrderDao;
 import com.bigcorp.persistence.cours.model.Address;
