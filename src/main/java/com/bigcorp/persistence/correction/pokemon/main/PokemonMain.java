@@ -74,8 +74,8 @@ public class PokemonMain {
 		}
 		
 		//Suppression Pokemon
-		System.out.println("\r\n Suppression Pokemon");
-		pokemonDao.deletePokemon(monPremierPokemon.getId());
+//		System.out.println("\r\n Suppression Pokemon");
+//		pokemonDao.deletePokemon(monPremierPokemon.getId());
 		
 	}
 	

@@ -64,7 +64,7 @@ public class DresseurDao {
 		EntityTransaction transaction = entityManager.getTransaction();
 		try {
 			transaction.begin();
-			Query query = entityManager.createQuery("delete Dresseur p where p.id = :id ");
+			Query query = entityManager.createQuery("delete Dresseur d where d.id = :id ");
 			query.setParameter("id", id);
 			query.executeUpdate();
 			transaction.commit();
@@ -87,7 +87,9 @@ public class DresseurDao {
 	 */
 	public List<Dresseur> getFromName(String nom) {
 		EntityManager em = PersistenceFactory.INSTANCE.getEntityManager();
-		TypedQuery<Dresseur> query = em.createQuery("select d " + " from Dresseur d" + " where d.nom = :paramName ",
+		TypedQuery<Dresseur> query = em.createQuery("select d " 
+		+ " from Dresseur d " 
+				+ " where d.nom = :paramName ",
 				Dresseur.class);
 		query.setParameter("paramName", nom);
 		List<Dresseur> resultList = query.getResultList();

@@ -1,5 +1,6 @@
 package com.bigcorp.persistence.correction.pokemon.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -21,6 +22,7 @@ public class Pokemon {
 
 	private Integer pointsDeVie;
 
+	@Column
 	private Integer pointsDExperience;
 
 	@ManyToOne(fetch = FetchType.LAZY)
