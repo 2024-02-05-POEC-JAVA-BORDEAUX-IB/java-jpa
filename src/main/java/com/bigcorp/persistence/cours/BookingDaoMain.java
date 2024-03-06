@@ -2,15 +2,18 @@ package com.bigcorp.persistence.cours;
 
 import com.bigcorp.persistence.cours.dao.BookingDao;
 import com.bigcorp.persistence.cours.dao.OrderDao;
+import com.bigcorp.persistence.cours.dao.RestaurantTableDao;
 import com.bigcorp.persistence.cours.model.Address;
 import com.bigcorp.persistence.cours.model.Booking;
 import com.bigcorp.persistence.cours.model.OrderFormateur;
+import com.bigcorp.persistence.cours.model.RestaurantTable;
 
 public class BookingDaoMain {
 
 	public static void main(String[] args) {
 		BookingDao bookingDao = new BookingDao();
 		OrderDao orderDao = new OrderDao();
+		RestaurantTableDao restaurantTableDao = new RestaurantTableDao();
 
 		// Création d'un booking
 		Booking newBooking = new Booking();
@@ -27,10 +30,19 @@ public class BookingDaoMain {
 		OrderFormateur orderFormateur = new OrderFormateur();
 		orderFormateur.setName("Super commande");
 		OrderFormateur savedOrder = orderDao.save(orderFormateur);
+		
+		// Création du restaurant Table
+		RestaurantTable rt = new RestaurantTable();
+		rt.setName("Notre meilleure table !");
+		RestaurantTable savedRestaurantTable = restaurantTableDao.save(rt);
 
 		// Rattachement de savedOrder à newBooking
 		newBooking.setOrderFormateur(savedOrder);
-
+		savedOrder.getBookings().add(newBooking);
+		
+		// Rattachement de restaurantTable à newBooking
+		newBooking.getRestaurantTables().add(savedRestaurantTable);
+		
 		// Sauvegarde
 		Booking savedBooking = bookingDao.save(newBooking);
 		
@@ -57,6 +69,10 @@ public class BookingDaoMain {
 			System.out.println("Le booking avec le nom " + booking.getName() + " est lié à order "
 					+ orderQuiVientDeLaBase.getName());
 		}
+		
+		
+		
+		
 
 //		
 //		

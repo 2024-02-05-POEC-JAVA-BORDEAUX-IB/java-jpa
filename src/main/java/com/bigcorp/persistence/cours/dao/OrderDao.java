@@ -1,6 +1,5 @@
 package com.bigcorp.persistence.cours.dao;
 
-import com.bigcorp.persistence.cours.model.Booking;
 import com.bigcorp.persistence.cours.model.OrderFormateur;
 import com.bigcorp.persistence.cours.util.PersistenceFactory;
 
