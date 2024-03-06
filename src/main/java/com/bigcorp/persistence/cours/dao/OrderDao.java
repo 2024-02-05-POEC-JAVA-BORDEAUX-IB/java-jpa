@@ -1,5 +1,7 @@
 package com.bigcorp.persistence.cours.dao;
 
+import java.util.List;
+
 import com.bigcorp.persistence.cours.model.OrderFormateur;
 import com.bigcorp.persistence.cours.util.PersistenceFactory;
 
@@ -38,17 +40,30 @@ public class OrderDao {
 		transaction.commit();
 		entityManager.close();
 	}
-	
+
 	public OrderFormateur findByIdWithBookings(Long id) {
 		EntityManager em = PersistenceFactory.INSTANCE.getEntityManager();
 		TypedQuery<OrderFormateur> query = em.createQuery("""
-				select o from OrderFormateur o 
-				left join fetch o.bookings 
+				select o from OrderFormateur o
+				left join fetch o.bookings
 				where o.id = :paramId """, OrderFormateur.class);
 		query.setParameter("paramId", id);
 		OrderFormateur orderFormateur = query.getSingleResult();
 		em.close();
 		return orderFormateur;
+	}
+
+	public List<OrderFormateur> findByNameWithBookingsAndTables(String name) {
+		EntityManager em = PersistenceFactory.INSTANCE.getEntityManager();
+		TypedQuery<OrderFormateur> query = em.createQuery("""
+				select o from OrderFormateur o
+				left join fetch o.bookings b
+				left join fetch b.restaurantTables
+				where o.name = :paramName """, OrderFormateur.class);
+		query.setParameter("paramName", name);
+		List<OrderFormateur> resultList = query.getResultList();
+		em.close();
+		return resultList;
 	}
 
 }
