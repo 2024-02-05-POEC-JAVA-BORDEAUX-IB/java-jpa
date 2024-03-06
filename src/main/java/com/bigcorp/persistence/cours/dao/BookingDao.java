@@ -83,6 +83,16 @@ public class BookingDao {
 		return resultList;
 	}
 	
-	
+	public Booking findByIdWithOrderFormateur(Long id) {
+		EntityManager em = PersistenceFactory.INSTANCE.getEntityManager();
+		TypedQuery<Booking> query = em.createQuery("""
+				select b from Booking b 
+				left join fetch b.orderFormateur 
+				where b.id = :paramId """, Booking.class);
+		query.setParameter("paramId", id);
+		Booking booking = query.getSingleResult();
+		em.close();
+		return booking;
+	}
 
 }

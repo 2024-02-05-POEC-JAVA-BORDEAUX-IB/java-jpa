@@ -12,28 +12,33 @@ public class BookingDaoMain {
 		BookingDao bookingDao = new BookingDao();
 		OrderDao orderDao = new OrderDao();
 
+		//Création d'un booking
 		Booking newBooking = new Booking();
 		newBooking.setName("Salut, j'ai été créé via le DAO !!");
 
+		//Création d'une adresse et rattachement à 
+		//newBooking
 		Address addresse1 = new Address();
 		newBooking.setAddress(addresse1);
 		addresse1.setCity("Montpellier");
 		addresse1.setPostcode("34000");
 		
+		//Création du orderFormateur
 		OrderFormateur orderFormateur = new OrderFormateur();
 		orderFormateur.setName("Super commande");
 		OrderFormateur savedOrder = orderDao.save(orderFormateur);
 		
+		
+		//Rattachement de savedOrder à newBooking
 		newBooking.setOrderFormateur(savedOrder);
+		
+		//Sauvegarde
 		Booking savedBooking = bookingDao.save(newBooking);
 
-		Booking newBooking2 = new Booking();
-		newBooking.setName("Réservation de bAse");
-		bookingDao.save(newBooking2);
-
-		Booking b = bookingDao.findById(savedBooking.getId());
-		b.getOrderFormateur().getName();
-		System.out.println(b.getName());
+		// Récupération du booking et du ORderFormateur associé
+		Booking bookingFromDatabase = bookingDao.findByIdWithOrderFormateur(savedBooking.getId());
+		System.out.println("Le nom de l'orderFormateur rattaché à booking vaut : " 
+				+ bookingFromDatabase.getOrderFormateur().getName());
 
 		
 		
