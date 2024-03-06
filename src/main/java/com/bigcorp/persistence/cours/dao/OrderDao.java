@@ -1,10 +1,12 @@
 package com.bigcorp.persistence.cours.dao;
 
+import com.bigcorp.persistence.cours.model.Booking;
 import com.bigcorp.persistence.cours.model.OrderFormateur;
 import com.bigcorp.persistence.cours.util.PersistenceFactory;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 
 public class OrderDao {
 
@@ -36,6 +38,18 @@ public class OrderDao {
 		entityManager.remove(savedOrder);
 		transaction.commit();
 		entityManager.close();
+	}
+	
+	public OrderFormateur findByIdWithBookings(Long id) {
+		EntityManager em = PersistenceFactory.INSTANCE.getEntityManager();
+		TypedQuery<OrderFormateur> query = em.createQuery("""
+				select o from OrderFormateur o 
+				left join fetch o.bookings 
+				where o.id = :paramId """, OrderFormateur.class);
+		query.setParameter("paramId", id);
+		OrderFormateur orderFormateur = query.getSingleResult();
+		em.close();
+		return orderFormateur;
 	}
 
 }

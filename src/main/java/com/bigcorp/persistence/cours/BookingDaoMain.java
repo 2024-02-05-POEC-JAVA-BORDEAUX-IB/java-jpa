@@ -12,43 +12,52 @@ public class BookingDaoMain {
 		BookingDao bookingDao = new BookingDao();
 		OrderDao orderDao = new OrderDao();
 
-		//Création d'un booking
+		// Création d'un booking
 		Booking newBooking = new Booking();
 		newBooking.setName("Salut, j'ai été créé via le DAO !!");
 
-		//Création d'une adresse et rattachement à 
-		//newBooking
+		// Création d'une adresse et rattachement à
+		// newBooking
 		Address addresse1 = new Address();
 		newBooking.setAddress(addresse1);
 		addresse1.setCity("Montpellier");
 		addresse1.setPostcode("34000");
-		
-		//Création du orderFormateur
+
+		// Création du orderFormateur
 		OrderFormateur orderFormateur = new OrderFormateur();
 		orderFormateur.setName("Super commande");
 		OrderFormateur savedOrder = orderDao.save(orderFormateur);
-		
-		
-		//Rattachement de savedOrder à newBooking
+
+		// Rattachement de savedOrder à newBooking
 		newBooking.setOrderFormateur(savedOrder);
-		
-		//Sauvegarde
+
+		// Sauvegarde
 		Booking savedBooking = bookingDao.save(newBooking);
+		
+		Booking booking2 = new Booking();
+		booking2.setOrderFormateur(savedOrder);
+		bookingDao.save(booking2);
+		
+		Booking booking3 = new Booking();
+		booking3.setOrderFormateur(savedOrder);
+		bookingDao.save(booking3);
+		
+		Booking booking4 = new Booking();
+		booking4.setOrderFormateur(savedOrder);
+		bookingDao.save(booking4);
+		
 
 		// Récupération du booking et du ORderFormateur associé
 		Booking bookingFromDatabase = bookingDao.findByIdWithOrderFormateur(savedBooking.getId());
-		System.out.println("Le nom de l'orderFormateur rattaché à booking vaut : " 
+		System.out.println("Le nom de l'orderFormateur rattaché à booking vaut : "
 				+ bookingFromDatabase.getOrderFormateur().getName());
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		OrderFormateur orderQuiVientDeLaBase = orderDao.findByIdWithBookings(savedOrder.getId());
+		for (Booking booking : orderQuiVientDeLaBase.getBookings()) {
+			System.out.println("Le booking avec le nom " + booking.getName() + " est lié à order "
+					+ orderQuiVientDeLaBase.getName());
+		}
+
 //		
 //		
 //		

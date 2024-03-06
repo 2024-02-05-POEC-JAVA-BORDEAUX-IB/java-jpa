@@ -24,7 +24,7 @@ public class Booking {
 	@Embedded
 	private Address address;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="ORDER_FORMATEUR_ID")
 	private OrderFormateur orderFormateur;
 
